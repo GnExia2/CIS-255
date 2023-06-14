@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class LabProgram {
+public class WinningTeam {
    public static void main(String[] args) {
       Scanner scnr = new Scanner(System.in);
 
@@ -17,7 +17,6 @@ public class LabProgram {
       team.printStanding();
    }
 }
-
 
 public class Team {
    // Declare private fields - name, wins, losses
