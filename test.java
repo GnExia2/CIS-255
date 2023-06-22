@@ -1,31 +1,30 @@
-import java.util.ArrayList;
+import java.util.Scanner;
 
-public class IntegerManager {
-   public static void printItems(ArrayList<Integer> numsList) {
-      int i;
+public class CallPerson {
+   public static void main(String [] args) {
+      String userName;
+      String differentUserName;
+      Person person1 = new Person();
 
-      System.out.print("items:");
+      userName = "Joe";
+      differentUserName = "Ron";
 
-      for (i = 0; i < numsList.size(); ++i) {
-         System.out.print(" " + numsList.get(i));
-      }
+      person1.setFirstName(userName);
+      System.out.println("He is not " + person1.getFirstName());
+      person1.setFirstName(differentUserName);
+      System.out.println("He is " + person1.getFirstName());
+   }
+}
 
-      System.out.println();
+
+public class Person {
+   private String firstName;
+
+   public void setFirstName(String firstNameToSet) {
+      firstName = firstNameToSet;
    }
 
-   public static void main(String[] args) {
-      int i;
-      ArrayList<Integer> intList = new ArrayList<Integer>();
-
-      for (i = 0; i < 4; ++i) {
-         intList.add(i);
-      }
-      printItems(intList);
-
-      intList.remove(1);
-      printItems(intList);
-
-      intList.add(1, 10);
-      printItems(intList);
+   public String getFirstName() {
+      return firstName;
    }
 }
