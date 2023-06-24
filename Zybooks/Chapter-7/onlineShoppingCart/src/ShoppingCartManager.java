@@ -12,23 +12,22 @@ public class ShoppingCartManager {
         System.out.println();
 
         System.out.println("Customer name: " + customerName);
-        System.out.println("Today's date: " + currentDate);
+        System.out.print("Today's date: " + currentDate);
 
         ShoppingCart cart = new ShoppingCart(customerName, currentDate);
 
         System.out.println();
-        printMenu();
 
         char userChoice;
         do {
             userChoice = scnr.nextLine().charAt(0);
             executeMenu(userChoice, cart, scnr);
-            System.out.println();
-            printMenu();
         } while (userChoice != 'q');
+
     }
 
     public static void printMenu() {
+        System.out.println();
         System.out.println("MENU");
         System.out.println("a - Add item to cart");
         System.out.println("d - Remove item from cart");
@@ -41,6 +40,7 @@ public class ShoppingCartManager {
     }
 
     public static void executeMenu(char userChoice, ShoppingCart cart, Scanner scnr) {
+      printMenu();
         switch (userChoice) {
             case 'a':
                 addItemToCart(cart, scnr);
@@ -58,10 +58,10 @@ public class ShoppingCartManager {
                 cart.printTotal();
                 break;
             case 'q':
-                System.out.println("Program terminating...");
+                //System.out.println("Program terminating...");
                 break;
             default:
-                System.out.println("Invalid menu option. Please try again.");
+                System.out.println("Choose an option:");
         }
     }
 
@@ -86,7 +86,7 @@ public class ShoppingCartManager {
 
     public static void removeItemFromCart(ShoppingCart cart, Scanner scnr) {
         System.out.println("REMOVE ITEM FROM CART");
-        System.out.println("Enter the name of the item to remove:");
+        System.out.println("Enter name of item to remove:");
         String itemName = scnr.nextLine();
         cart.removeItem(itemName);
     }
@@ -104,4 +104,3 @@ public class ShoppingCartManager {
         cart.modifyItem(modifiedItem);
     }
 }
-

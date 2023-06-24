@@ -1,4 +1,7 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public class ShoppingCartManager {
     public static void main(String[] args) {
@@ -12,23 +15,22 @@ public class ShoppingCartManager {
         System.out.println();
 
         System.out.println("Customer name: " + customerName);
-        System.out.println("Today's date: " + currentDate);
+        System.out.print("Today's date: " + currentDate);
 
         ShoppingCart cart = new ShoppingCart(customerName, currentDate);
 
         System.out.println();
-        printMenu();
 
         char userChoice;
         do {
             userChoice = scnr.nextLine().charAt(0);
             executeMenu(userChoice, cart, scnr);
-            System.out.println();
-            printMenu();
         } while (userChoice != 'q');
+
     }
 
     public static void printMenu() {
+        System.out.println();
         System.out.println("MENU");
         System.out.println("a - Add item to cart");
         System.out.println("d - Remove item from cart");
@@ -41,6 +43,7 @@ public class ShoppingCartManager {
     }
 
     public static void executeMenu(char userChoice, ShoppingCart cart, Scanner scnr) {
+      printMenu();
         switch (userChoice) {
             case 'a':
                 addItemToCart(cart, scnr);
@@ -58,10 +61,10 @@ public class ShoppingCartManager {
                 cart.printTotal();
                 break;
             case 'q':
-                System.out.println("Program terminating...");
+                //System.out.println("Program terminating...");
                 break;
             default:
-                System.out.println("Invalid menu option. Please try again.");
+                System.out.println("Choose an option:");
         }
     }
 
@@ -86,7 +89,7 @@ public class ShoppingCartManager {
 
     public static void removeItemFromCart(ShoppingCart cart, Scanner scnr) {
         System.out.println("REMOVE ITEM FROM CART");
-        System.out.println("Enter the name of the item to remove:");
+        System.out.println("Enter name of item to remove:");
         String itemName = scnr.nextLine();
         cart.removeItem(itemName);
     }
@@ -105,8 +108,7 @@ public class ShoppingCartManager {
     }
 }
 
-import java.util.ArrayList;
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 public class ShoppingCart {
     private String customerName;
     private String currentDate;
@@ -139,7 +141,7 @@ public class ShoppingCart {
     public void removeItem(String itemName) {
         boolean itemFound = false;
         for (ItemToPurchase item : cartItems) {
-            if (item.getItemName().equals(itemName)) {
+            if (item.getName().equals(itemName)) {
                 cartItems.remove(item);
                 itemFound = true;
                 break;
@@ -153,7 +155,7 @@ public class ShoppingCart {
     public void modifyItem(ItemToPurchase modifiedItem) {
         boolean itemFound = false;
         for (ItemToPurchase item : cartItems) {
-            if (item.getItemName().equals(modifiedItem.getItemName())) {
+            if (item.getName().equals(modifiedItem.getName())) {
                 if (!modifiedItem.getDescription().equals("none")) {
                     item.setDescription(modifiedItem.getDescription());
                 }
@@ -183,7 +185,7 @@ public class ShoppingCart {
     public int getCostOfCart() {
         int totalCost = 0;
         for (ItemToPurchase item : cartItems) {
-            totalCost += item.getItemPrice() * item.getQuantity();
+            totalCost += item.getPrice() * item.getQuantity();
         }
         return totalCost;
     }
@@ -202,6 +204,7 @@ public class ShoppingCart {
         }
         System.out.println();
         System.out.println("Total: $" + getCostOfCart());
+
     }
 
     public void printDescriptions() {
@@ -219,6 +222,8 @@ public class ShoppingCart {
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 public class ItemToPurchase {
     private String itemName;
     private String itemDescription;
@@ -226,7 +231,10 @@ public class ItemToPurchase {
     private int itemQuantity;
 
     public ItemToPurchase() {
-        this.itemDescription = "none";
+        itemName = "none";
+        itemDescription = "none";
+        itemPrice = 0;
+        itemQuantity = 0;
     }
 
     public ItemToPurchase(String itemName, String itemDescription, int itemPrice, int itemQuantity) {
@@ -236,16 +244,40 @@ public class ItemToPurchase {
         this.itemQuantity = itemQuantity;
     }
 
-    public void setDescription(String itemDescription) {
-        this.itemDescription = itemDescription;
+    public String getName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
     public String getDescription() {
         return itemDescription;
     }
 
+    public void setDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
+    public int getPrice() {
+        return itemPrice;
+    }
+
+    public void setPrice(int itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
+    public int getQuantity() {
+        return itemQuantity;
+    }
+
+    public void setQuantity(int itemQuantity) {
+        this.itemQuantity = itemQuantity;
+    }
+
     public void printItemCost() {
-        System.out.println(itemName + " " + itemQuantity + " @ $" + itemPrice + " = $" + (itemPrice * itemQuantity));
+        System.out.println(itemName + " " + itemQuantity + " @ $" + itemPrice + " = $" + (itemQuantity * itemPrice));
     }
 
     public void printItemDescription() {

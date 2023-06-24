@@ -18,7 +18,7 @@ public class ItemToPurchase {
         this.itemQuantity = itemQuantity;
     }
 
-    public String getItemName() {
+    public String getName() {
         return itemName;
     }
 
@@ -26,27 +26,27 @@ public class ItemToPurchase {
         this.itemName = itemName;
     }
 
-    public String getItemDescription() {
+    public String getDescription() {
         return itemDescription;
     }
 
-    public void setItemDescription(String itemDescription) {
+    public void setDescription(String itemDescription) {
         this.itemDescription = itemDescription;
     }
 
-    public int getItemPrice() {
+    public int getPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(int itemPrice) {
+    public void setPrice(int itemPrice) {
         this.itemPrice = itemPrice;
     }
 
-    public int getItemQuantity() {
+    public int getQuantity() {
         return itemQuantity;
     }
 
-    public void setItemQuantity(int itemQuantity) {
+    public void setQuantity(int itemQuantity) {
         this.itemQuantity = itemQuantity;
     }
 

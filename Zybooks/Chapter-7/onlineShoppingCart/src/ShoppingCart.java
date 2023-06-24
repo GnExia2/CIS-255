@@ -32,7 +32,7 @@ public class ShoppingCart {
     public void removeItem(String itemName) {
         boolean itemFound = false;
         for (ItemToPurchase item : cartItems) {
-            if (item.getItemName().equals(itemName)) {
+            if (item.getName().equals(itemName)) {
                 cartItems.remove(item);
                 itemFound = true;
                 break;
@@ -46,15 +46,15 @@ public class ShoppingCart {
     public void modifyItem(ItemToPurchase modifiedItem) {
         boolean itemFound = false;
         for (ItemToPurchase item : cartItems) {
-            if (item.getItemName().equals(modifiedItem.getItemName())) {
-                if (!modifiedItem.getItemDescription().equals("none")) {
-                    item.setItemDescription(modifiedItem.getItemDescription());
+            if (item.getName().equals(modifiedItem.getName())) {
+                if (!modifiedItem.getDescription().equals("none")) {
+                    item.setDescription(modifiedItem.getDescription());
                 }
-                if (modifiedItem.getItemPrice() != 0) {
-                    item.setItemPrice(modifiedItem.getItemPrice());
+                if (modifiedItem.getPrice() != 0) {
+                    item.setPrice(modifiedItem.getPrice());
                 }
-                if (modifiedItem.getItemQuantity() != 0) {
-                    item.setItemQuantity(modifiedItem.getItemQuantity());
+                if (modifiedItem.getQuantity() != 0) {
+                    item.setQuantity(modifiedItem.getQuantity());
                 }
                 itemFound = true;
                 break;
@@ -68,7 +68,7 @@ public class ShoppingCart {
     public int getNumItemsInCart() {
         int numItems = 0;
         for (ItemToPurchase item : cartItems) {
-            numItems += item.getItemQuantity();
+            numItems += item.getQuantity();
         }
         return numItems;
     }
@@ -76,7 +76,7 @@ public class ShoppingCart {
     public int getCostOfCart() {
         int totalCost = 0;
         for (ItemToPurchase item : cartItems) {
-            totalCost += item.getItemPrice() * item.getItemQuantity();
+            totalCost += item.getPrice() * item.getQuantity();
         }
         return totalCost;
     }
@@ -95,6 +95,7 @@ public class ShoppingCart {
         }
         System.out.println();
         System.out.println("Total: $" + getCostOfCart());
+
     }
 
     public void printDescriptions() {
