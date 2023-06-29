@@ -20,6 +20,7 @@ public class ShoppingCartManager {
 
         char userChoice;
         do {
+            printMenu();
             userChoice = scnr.nextLine().charAt(0);
             executeMenu(userChoice, cart, scnr);
         } while (userChoice != 'q');
@@ -40,7 +41,6 @@ public class ShoppingCartManager {
     }
 
     public static void executeMenu(char userChoice, ShoppingCart cart, Scanner scnr) {
-      printMenu();
         switch (userChoice) {
             case 'a':
                 addItemToCart(cart, scnr);
@@ -58,7 +58,6 @@ public class ShoppingCartManager {
                 cart.printTotal();
                 break;
             case 'q':
-                //System.out.println("Program terminating...");
                 break;
             default:
                 System.out.println("Choose an option:");
