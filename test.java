@@ -1,44 +1,28 @@
-public class PrintMedia {
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class FindName {
+   public static void findMatch(ArrayList<String> namesList, int minIndex, int maxIndex) {
+      int rangeSize;
+      int midIndex;
+
+      /* Your code goes here */
+
+      System.out.println("Number of elements in the range: " + rangeSize);
+      System.out.println("Middle index: " + midIndex);
+      System.out.println("Element at middle index: " + namesList.get(midIndex));
+   }
+
    public static void main(String[] args) {
-      Episode ep1 = new Episode();
-      Song song1 = new Song();
+      Scanner scnr = new Scanner(System.in);
+      ArrayList<String> dataList = new ArrayList<String>();
+      int numData;
+      int i;
 
-      ep1.setDuration(25);
-      song1.setDuration(4, 15);
-
-      ep1.printDuration();
-      song1.printDuration();
-   }
-}
-
-public interface Media {
-   public void printDuration();
-}
-
-public class Song implements Media {
-   private int minutes;
-   private int seconds;
-
-   public void setDuration(int durationMins, int durationSecs) {
-      minutes = durationMins;
-      seconds = durationSecs;
-   }
-
-   @Override
-   public void printDuration() {
-      System.out.println(minutes + ":" + seconds);
-   }
-}
-
-public class Episode implements Media {
-   private int duration;
-
-   public void setDuration(int durationMins) {
-      duration = durationMins;
-   }
-
-   @Override
-   public void printDuration() {
-      System.out.println(duration + " minutes");
+      numData = scnr.nextInt();
+      for (i = 0; i < numData; ++i) {
+         dataList.add(scnr.next());
+      }
+      findMatch(dataList, 0, dataList.size() - 1);
    }
 }
