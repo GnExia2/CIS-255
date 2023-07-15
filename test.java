@@ -1,28 +1,39 @@
+// "New" means new compared to previous level
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class FindName {
-   public static void findMatch(ArrayList<String> namesList, int minIndex, int maxIndex) {
-      int rangeSize;
-      int midIndex;
+public class NumScrambler2 {
+   public static void scrambleNums(ArrayList<Integer> remainNums,
+                                   ArrayList<Integer> scramNums) {
+      ArrayList<Integer> tmpRemainNums;
+      int tmpRemovedNum;
+      int i;
 
-      /* Your code goes here */
-
-      System.out.println("Number of elements in the range: " + rangeSize);
-      System.out.println("Middle index: " + midIndex);
-      System.out.println("Element at middle index: " + namesList.get(midIndex));
+      if (remainNums.size() == 0) {
+         System.out.print(scramNums.get(0));
+         System.out.print(scramNums.get(1));
+         System.out.println(scramNums.get(2));
+      }
+      else {
+         for (i = remainNums.size() - 1; i >= 0; --i) { // New: This line changed
+            tmpRemainNums = new ArrayList<Integer>(remainNums);
+            tmpRemovedNum = tmpRemainNums.remove(i);
+            scramNums.add(tmpRemovedNum);
+            scrambleNums(tmpRemainNums, scramNums);
+            scramNums.remove(scramNums.size() - 1);
+         }
+      }
    }
 
    public static void main(String[] args) {
       Scanner scnr = new Scanner(System.in);
-      ArrayList<String> dataList = new ArrayList<String>();
-      int numData;
-      int i;
+      ArrayList<Integer> numsToScramble = new ArrayList<Integer>();
+      ArrayList<Integer> resultNums = new ArrayList<Integer>();
 
-      numData = scnr.nextInt();
-      for (i = 0; i < numData; ++i) {
-         dataList.add(scnr.next());
-      }
-      findMatch(dataList, 0, dataList.size() - 1);
+      numsToScramble.add(3);
+      numsToScramble.add(8);
+      numsToScramble.add(4);
+
+      scrambleNums(numsToScramble, resultNums);
    }
 }
