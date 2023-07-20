@@ -1,39 +1,23 @@
-// "New" means new compared to previous level
 import java.util.Scanner;
-import java.util.ArrayList;
 
-public class NumScrambler2 {
-   public static void scrambleNums(ArrayList<Integer> remainNums,
-                                   ArrayList<Integer> scramNums) {
-      ArrayList<Integer> tmpRemainNums;
-      int tmpRemovedNum;
-      int i;
+public class LabProgram {
 
-      if (remainNums.size() == 0) {
-         System.out.print(scramNums.get(0));
-         System.out.print(scramNums.get(1));
-         System.out.println(scramNums.get(2));
-      }
-      else {
-         for (i = remainNums.size() - 1; i >= 0; --i) { // New: This line changed
-            tmpRemainNums = new ArrayList<Integer>(remainNums);
-            tmpRemovedNum = tmpRemainNums.remove(i);
-            scramNums.add(tmpRemovedNum);
-            scrambleNums(tmpRemainNums, scramNums);
-            scramNums.remove(scramNums.size() - 1);
-         }
-      }
-   }
+    public static int digitCount(int num) {
+        // Base case: When the number is 0, return 1 (since it has one digit)
+        if (num == 0) {
+            return 1;
+        }
 
-   public static void main(String[] args) {
-      Scanner scnr = new Scanner(System.in);
-      ArrayList<Integer> numsToScramble = new ArrayList<Integer>();
-      ArrayList<Integer> resultNums = new ArrayList<Integer>();
+        // Recursive case: Divide the number by 10 and increment the digit count by 1
+        return 1 + digitCount(num / 10);
+    }
 
-      numsToScramble.add(3);
-      numsToScramble.add(8);
-      numsToScramble.add(4);
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        int num, digits;
 
-      scrambleNums(numsToScramble, resultNums);
-   }
+        num = scnr.nextInt();
+        digits = digitCount(num);
+        System.out.println(digits);
+    }
 }
