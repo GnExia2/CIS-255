@@ -1,91 +1,60 @@
-public class IntNode {
-   private int dataVal;         // Node data
-   private IntNode nextNodePtr; // Reference to the next node
+public class DrawTriangle {
+    public static void main(String[] args) {
+        int n = 7; // Replace 7 with the desired value of n
+        drawTriangle(n);
+    }
 
-   public IntNode() {
-      dataVal = 0;
-      nextNodePtr = null;
-   }
+    public static void drawTriangle(int n) {
+        if (n == 1) {
+            System.out.println("*".center(19));
+        } else {
+            drawTriangle(n - 2);
+            System.out.println(String.format("%" + 19 + "s", "*".repeat(n)));
+        }
+    }
 
-   // Constructor
-   public IntNode(int dataInit) {
-      this.dataVal = dataInit;
-      this.nextNodePtr = null;
-   }
+    // Helper methods to simulate Python functions not present in Java
+    public static String center(int width) {
+        int spaces = (width - 1) / 2;
+        return String.format("%" + (width - spaces) + "s", "");
+    }
 
-   // Constructor
-   public IntNode(int dataInit, IntNode nextLoc) {
-      this.dataVal = dataInit;
-      this.nextNodePtr = nextLoc;
-   }
-
-   /* Insert node after this node.
-    Before: this -- next
-    After:  this -- node -- next
-    */
-   public void insertAfter(IntNode nodeLoc) {
-      IntNode tmpNext;
-
-      tmpNext = this.nextNodePtr;
-      this.nextNodePtr = nodeLoc;
-      nodeLoc.nextNodePtr = tmpNext;
-   }
-
-   // Get location pointed by nextNodePtr
-   public IntNode getNext() {
-      return this.nextNodePtr;
-   }
-
-   // Get node value
-   public int getNodeData() {
-      return this.dataVal;
-   }
-
-   // Print node value
-   public void printNodeData() {
-      System.out.println(this.dataVal);
-   }
+    public static String repeat(int count) {
+        return new String(new char[count]).replace("\0", "*");
+    }
 }
 
-public static int findMax(IntNode headObj) {
-   if (headObj.getNext() == null) {
-      // Empty list, return -99
-      return -99;
-   }
 
-   int max = Integer.MIN_VALUE;
-   IntNode currNode = headObj.getNext();
 
-   while (currNode != null) {
-      int nodeData = currNode.getNodeData();
-      if (nodeData > max) {
-         max = nodeData;
-      }
-      currNode = currNode.getNext();
-   }
+import java.util.Scanner;
 
-   return max;
-}
+public class LabProgram {
 
-   public static void main(String[] args) {
-      IntNode headObj;
-      IntNode currObj;
-      IntNode lastObj;
-      int i;
-      int max;
+    // Recursive method to draw the right-side up isosceles triangle
+    public static void drawTriangle(int baseLength) {
+        // Base case: When the base length is 1, print a single '*'
+        if (baseLength == 1) {
+            System.out.println("         *");
+        } else {
+            // Recursive case: Draw the upper part of the triangle with a smaller base length
+            drawTriangle(baseLength - 2);
 
-      // Create head node
-      headObj = new IntNode(-1);
-      lastObj = headObj;
+            // Print spaces and '*' characters to form the triangle
+            for (int i = 0; i < (9 + (baseLength - 1) / 2); i++) {
+                System.out.print(" ");
+            }
+            for (int i = 0; i < baseLength; i++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
 
-      // Add nodes to the list
-      for (i = 0; i < 20; ++i) {
-         currObj = new IntNode(i);
-         lastObj.insertAfter(currObj);
-         lastObj = currObj;
-      }
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        int baseLength;
 
-      max = findMax(headObj);
-      System.out.println(max);
-   }
+        baseLength = scnr.nextInt();
+        drawTriangle(baseLength);
+    }
 }

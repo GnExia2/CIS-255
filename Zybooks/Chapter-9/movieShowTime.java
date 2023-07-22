@@ -11,25 +11,47 @@ public class LabProgram {
         FileInputStream fileInputStream = new FileInputStream(fileName);
         Scanner fileScanner = new Scanner(fileInputStream);
 
+        String prevTitle = null;
+        String title = null;
+        String rating = null;
+        StringBuilder showtimes = new StringBuilder();
+
         while (fileScanner.hasNextLine()) {
             String line = fileScanner.nextLine();
-            String[] fields = line.split(",");
+            String[] movieData = line.split(",");
 
-            String title = fields[1].length() > 44 ? fields[1].substring(0, 44) : fields[1];
-            String rating = fields[2];
+            // Extract movie data from the CSV file
+            String time = movieData[0];
+            title = movieData[1].trim();
+            rating = movieData[2].trim();
 
-            StringBuilder showtimes = new StringBuilder();
-            for (int i = 0; i < fields.length - 3; i++) {
-                showtimes.append(fields[i]);
-                if (i < fields.length - 4) {
-                    showtimes.append(" ");
-                }
+            // Check if it's a new movie title
+            if (prevTitle != null && !title.equals(prevTitle)) {
+                printFormattedRow(prevTitle, rating, showtimes.toString());
+                showtimes = new StringBuilder();
             }
 
-            System.out.printf("%-44s | %5s | %s%n", title, rating, showtimes);
+            showtimes.append(time).append(" ");
+            prevTitle = title;
+        }
+
+        // Print the last movie after the loop ends
+        if (title != null) {
+            printFormattedRow(title, rating, showtimes.toString());
         }
 
         fileScanner.close();
         fileInputStream.close();
+        scnr.close();
+    }
+
+    public static void printFormattedRow(String title, String rating, String showtimes) {
+        // Truncate title if it exceeds 44 characters
+        if (title.length() > 44) {
+            title = title.substring(0, 44);
+        }
+
+        // Format and output the row
+        System.out.printf("%-44s | %5s | %s%n", title, rating, showtimes.trim());
     }
 }
