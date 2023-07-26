@@ -1,3 +1,5 @@
+//In terminal run "java ShapeTester2.java"
+
 import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -98,9 +100,12 @@ public class ShapeTester2 {
                     }
                 }
             }
-        }    
+        }
     }
 }
+
+
+
 
 
 
